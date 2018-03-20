@@ -70,11 +70,9 @@ Make sure you have [hasura CLI](https://docs.hasura.io/0.15/manual/install-hasur
 
 ### Using this without the Hasura APIs
 
-You will have to configure your own login methods if you are not using the Hasura APIs. Check the [detailed instructions](#detailed-instructions-for-usage) for more information.
+You will have to configure your own login methods if you are not using the Hasura APIs. 
 
-## Detailed Instructions
-
-- For using the application with Expo SDK, [click here](https://github.com/hasura/react-native-auth-boilerplate/blob/master/expo)for more detailed instructions. 
+- For using the application with Expo SDK, [click here](https://github.com/hasura/react-native-auth-boilerplate/blob/master/expo) for more detailed instructions. 
 
 
 - For using this with vanilla react native, [click here](https://github.com/hasura/react-native-auth-boilerplate/blob/master/vanilla) for more detailed instructions. 
