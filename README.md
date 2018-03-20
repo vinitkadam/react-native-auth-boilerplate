@@ -8,7 +8,7 @@ This has been created as an open-source boilerplate by the Hasura team. There ar
 
 ## Who should use this?
 
-- React Native developers looking to start building an app with authentication already covered. You can modify both the UI and the backend logic to customize it per your own requirements. 
+- Fullstack React Native developers looking to start building an app with authentication already covered. You can modify both the UI and the backend logic to customize it per your own requirements. 
 
 - Developers trying to use Hasura with React Native.
 
