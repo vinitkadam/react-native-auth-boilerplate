@@ -15,7 +15,7 @@ This has been open sourced by the Hasura team. There are instructions below in c
 
 ## Getting Started
 
-## Using this with the Hasura APIs
+### Using this with the Hasura APIs
 
 Make sure you have [hasura CLI](https://docs.hasura.io/0.15/manual/install-hasura-cli.html) installed.
 
