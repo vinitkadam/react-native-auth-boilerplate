@@ -2,7 +2,7 @@
 
 This is a React Native boilerplate with auth already implemented. It uses [Nativebase](https://nativebase.io) for the UI and [Hasura APIs](https://hasura.io/features/auth) for the backend.
 
-This has been open sourced by the Hasura team. There are instructions below in case you wish to use this boilerplate without the Hasura APIs. 
+This has been created as an open-source boilerplate by the Hasura team. There are instructions below in case you wish to use this boilerplate without the Hasura APIs. 
 
 ![gif](https://raw.githubusercontent.com/hasura/react-native-auth-boilerplate/master/readme-assets/ios/ios_gif.gif)
 
