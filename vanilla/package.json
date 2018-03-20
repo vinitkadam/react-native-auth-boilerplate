@@ -1,5 +1,5 @@
 {
-  "name": "hasuraautheject",
+  "name": "vanilla",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,17 +8,16 @@
   },
   "dependencies": {
     "native-base": "^2.3.10",
-    "react": "^16.3.0-alpha.1",
+    "react": "16.3.0-alpha.2",
     "react-native": "0.54.2",
-    "react-native-google-signin": "^0.12.0",
     "react-native-vector-icons": "^4.5.0",
-    "react-navigation": "^1.5.4"
+    "react-navigation": "^1.5.8"
   },
   "devDependencies": {
-    "babel-jest": "22.4.1",
+    "babel-jest": "23.0.0-alpha.0",
     "babel-preset-react-native": "4.0.0",
     "jest": "22.4.2",
-    "react-test-renderer": "^16.3.0-alpha.1"
+    "react-test-renderer": "16.3.0-alpha.2"
   },
   "jest": {
     "preset": "react-native"

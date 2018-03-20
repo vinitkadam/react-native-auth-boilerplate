@@ -35,7 +35,7 @@ export default class IndexEmail extends React.Component {
           </Body>
           <Right />
         </Header>
-        <Tabs initialPage={0} ref={(tabView) => {this.tabView=tabView}}>
+        <Tabs ref={(tabView) => {this.tabView=tabView}}>
           <Tab heading="Signup">
             <EmailSignup loginCallback={this.props.loginCallback} loginScreenCallback={this.goToLoginScreen}/>
           </Tab>

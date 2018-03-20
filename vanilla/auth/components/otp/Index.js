@@ -8,10 +8,6 @@ const styles = StyleSheet.create(index);
 
 export default class IndexOtp extends React.Component {
 
-  goToLoginScreen = () => {
-    this.tabView.goToPage(1);
-  }
-
   render() {
     const backButton = () => {
       if (this.props.shouldShowBackButton) {
