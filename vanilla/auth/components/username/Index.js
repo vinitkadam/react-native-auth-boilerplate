@@ -9,6 +9,7 @@ const styles = StyleSheet.create(index);
 
 export default class IndexUsername extends React.Component {
 
+
   goToLoginScreen = () => {
     this.tabView.goToPage(1);
   }
@@ -35,7 +36,7 @@ export default class IndexUsername extends React.Component {
           </Body>
           <Right />
         </Header>
-        <Tabs initialPage={0} ref={(tabView) => {this.tabView=tabView}}>
+        <Tabs ref={(tabView) => {this.tabView=tabView}}>
           <Tab heading="Signup">
             <UsernameSignup loginCallback={this.props.loginCallback}/>
           </Tab>

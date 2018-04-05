@@ -9,7 +9,7 @@ import IndexOtp from './otp/Index';
 import EmailSignup from './email/Signup';
 import EmailLogin from './email/Login';
 import IndexEmail from './email/Index';
-import {handleFacebookAuth} from './facebook/actions';
+//import {handleFacebookAuth} from './facebook/actions';
 import {handleGoogleAuth} from './google/actions';
 import {storeSession} from '../actions';
 
@@ -149,7 +149,7 @@ export default class AuthHome extends React.Component {
       </View>
     );
   }
-
+/*
   facebookButton = () => {
     if (this.state.authConf.facebook) {
       return (
@@ -162,7 +162,7 @@ export default class AuthHome extends React.Component {
     }
     return null;
   }
-
+*/
   googleButton = () => {
     if (this.state.authConf.googleArray && this.state.authConf.googleArray.length >= 2) {
       return (
@@ -175,7 +175,6 @@ export default class AuthHome extends React.Component {
     }
     return null;
   }
-
   logoView = () => {
     return (
       <View style={styles.logoContainer}>
@@ -237,9 +236,6 @@ export default class AuthHome extends React.Component {
         )
       }
     }
-
-
-
     return (
       <Root>
         <Container>
@@ -251,6 +247,7 @@ export default class AuthHome extends React.Component {
             <Right />
           </Header>
           <View style={styles.homeContainer}>
+            {this.logoView()}
             {this.usernameLoginButton()}
             {this.emailLoginButton()}
             {this.mobileLoginButton()}

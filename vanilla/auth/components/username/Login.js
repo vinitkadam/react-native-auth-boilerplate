@@ -44,7 +44,7 @@ export default class UsernameLogin extends React.Component {
     this.setLoading();
     const loginResp = await tryLogin(username, password);
     if (loginResp.success) {
-      await storeSession({id: loginResp.hasura_id, token: loginResp.auth_token});
+      await storeSession({id: loginResp.hasura_id, token: loginResp.auth_token, type: "username"});
       this.unsetLoading();
       this.props.loginCallback({id: loginResp.hasura_id, token: loginResp.auth_token, type: "username"});
     } else {
@@ -60,7 +60,7 @@ export default class UsernameLogin extends React.Component {
         <Form>
           <Item style={styles.textbox}>
             <Input  placeholder="Username" value={this.state.username} onChangeText={this.handleUsernameChange}
-            autoCorrect={false} autoCapitalize="none"  />
+            autoCorrect={false} autoCapitalize="none"/>
           </Item>
           <Item style={styles.textbox}>
             <Input  placeholder="Password" secureTextEntry value={this.state.password} onChangeText={this.handlePasswordChange} autoCapitalize="none"/>

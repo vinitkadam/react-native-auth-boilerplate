@@ -45,13 +45,9 @@ const fetchSession = async () => {
   }
 };
 
-const loadFonts = async () => {
-  console.log("Loading fonts");
-}
 
 export {
   fetchAuthConf,
   storeSession,
   fetchSession,
-  loadFonts
 };
