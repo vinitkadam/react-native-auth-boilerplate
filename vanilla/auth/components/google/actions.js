@@ -2,87 +2,65 @@ import {Alert} from 'react-native';
 import {storeSession} from '../../actions';
 import {clusterName} from '../../../Hasura';
 
-
-const tryGoogleLogin = async (token) => {
-  let googleInfo = null;
-  try {
-    const googleResp = await fetch ('https://www.googleapis.com/userinfo/v2/me', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    googleInfo = await googleResp.json();
-  } catch (e) {
-    console.log(e);
-    return {
-      message: e.toString()
-    }
-  }
-  const hasuraAuthUrl = `https://auth.${clusterName}.hasura-app.io/v1/signup`;
-  const options = {
-    "method": "POST",
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": JSON.stringify({
-      "provider": "google",
-      "data": {
-        "access_token": token
-      }
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+ trygooglelogin = async(user, loginCallback, stopLoadingIndicator)=>{
+   const hasuraAuthUrl = `https://auth.${clusterName}.hasura-app.io/v1/signup`;
+   const options = {
+     "method": "POST",
+     "headers": {
+       "Content-Type": "application/json"
+     },
+     "body": JSON.stringify({
+       "provider": "google",
+       "data": {
+         "access_token": user.accessToken
+       }
+     })
+   };
+   try {
+     fetch(hasuraAuthUrl, options)
+     .then((res) => res.json())
+     .then((respObj)=>{
+       respObj['success'] = true;
+       respObj['google_profile_info'] = user;
+       storeSession({
+         id: respObj.hasura_id,
+         token: respObj.auth_token,
+         googleInfo: respObj.google_profile_info,
+         type: "google"
+       });
+       loginCallback({
+         id: respObj.hasura_id,
+         token: respObj.auth_token,
+         googleInfo: respObj.google_profile_info,
+         type: "google"
+       });
+       stopLoadingIndicator();
+     });
+   } catch (e) {
+   console.log(e);
+   stopLoadingIndicator();
+   }
+ }
+const handleGoogleAuth = async(androidClientId, iosClientid, loginCallback, startLoadingIndicator, stopLoadingIndicator) => {
+  startLoadingIndicator();
+  GoogleSignin.hasPlayServices({ autoResolve: true });
+  GoogleSignin.configure({
+    iosClientId: iosClientid,
+    webClientId: androidClientId
+  })
+  .then(() => {
+    GoogleSignin.signIn()
+    .then((user) => {
+      trygooglelogin(user, loginCallback, stopLoadingIndicator);
     })
-  };
-  try {
-    const response = await fetch(hasuraAuthUrl, options);
-    const respObj = await response.json();
-    if (response.status == 200) {
-      respObj['success'] = true;
-      respObj['google_profile_info'] = googleInfo;
-    }
-    return respObj;
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
-};
-
-const handleGoogleAuth = async(androidClientId, iosClientId, loginCallback, startLoadingIndicator, stopLoadingIndicator) => {
-  try {
-    startLoadingIndicator();
-    const result = await Expo.Google.logInAsync({
-      androidClientId,
-      iosClientId,
-      scopes: ['profile', 'email']
-    });
-    if (result.type === 'success') {
-      const googleSignupResp =  await tryGoogleLogin(result.accessToken);
-      if (googleSignupResp.success) {
-        await storeSession({
-          id: googleSignupResp.hasura_id,
-          token: googleSignupResp.auth_token,
-          googleInfo: googleSignupResp.google_profile_info,
-          type: "google"
-        });
-        loginCallback({
-          id: googleSignupResp.hasura_id,
-          token: googleSignupResp.auth_token,
-          googleInfo: googleSignupResp.google_profile_info,
-          type: "google"
-        });
-        return;
-      } else {
-        Alert.alert('Error', googleSignupResp.message);
-        stopLoadingIndicator();
-      }
-    } else {
-      Alert.alert('Error', 'Google login failed');
-      stopLoadingIndicator();
-    }
-  } catch (e) {
-    console.log(e);
+    .catch((err) => {
+    console.log('WRONG SIGNIN', err);
     stopLoadingIndicator();
-  }
+    })
+    .done();
+  });
 }
-
 export {
   handleGoogleAuth
 };

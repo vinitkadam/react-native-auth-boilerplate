@@ -10,7 +10,7 @@ import EmailSignup from './email/Signup';
 import EmailLogin from './email/Login';
 import IndexEmail from './email/Index';
 //import {handleFacebookAuth} from './facebook/actions';
-//import {handleGoogleAuth} from './google/actions';
+import {handleGoogleAuth} from './google/actions';
 import {storeSession} from '../actions';
 
 const styles = StyleSheet.create(home);
@@ -162,7 +162,7 @@ export default class AuthHome extends React.Component {
     }
     return null;
   }
-
+*/
   googleButton = () => {
     if (this.state.authConf.googleArray && this.state.authConf.googleArray.length >= 2) {
       return (
@@ -175,7 +175,6 @@ export default class AuthHome extends React.Component {
     }
     return null;
   }
-*/
   logoView = () => {
     return (
       <View style={styles.logoContainer}>
@@ -237,9 +236,6 @@ export default class AuthHome extends React.Component {
         )
       }
     }
-
-
-
     return (
       <Root>
         <Container>
@@ -255,6 +251,7 @@ export default class AuthHome extends React.Component {
             {this.usernameLoginButton()}
             {this.emailLoginButton()}
             {this.mobileLoginButton()}
+            {this.googleButton()}
           </View>
         </Container>
       </Root>
