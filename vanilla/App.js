@@ -1,7 +1,7 @@
 import React from 'react';
 import { Root, Container } from 'native-base';
 import { StackNavigator } from 'react-navigation';
-import Index from './IndexScreen';
+import Index from './Home';
 
 const AppNavigator = StackNavigator(
   {
