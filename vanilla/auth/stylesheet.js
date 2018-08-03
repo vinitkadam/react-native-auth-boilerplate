@@ -9,7 +9,7 @@ const home = {
   header: {
   },
   headerText: {
-    color: Platform.OS === 'ios' ? null : "white"
+    color: (Platform.OS === 'ios') ? null : "white"
   },
   button: {
     flexDirection: 'row',
@@ -33,7 +33,7 @@ const home = {
     flexDirection: 'column',
     marginHorizontal: 10,
     alignItems: 'center',
-    paddingBottom: 50
+    paddingVertical: 20
   },
   logo: {
     width: 200,
@@ -49,6 +49,7 @@ const username = {
   header: {
   },
   headerText: {
+    color: (Platform.OS === 'ios') ? null : "white"
   },
   itemContainer: {
     marginVertical: 20,
@@ -74,6 +75,7 @@ const otp = {
   header: {
   },
   headerText: {
+    color: (Platform.OS === 'ios') ? null : "white"
   },
   numberContainer: {
     flexDirection: 'row',
@@ -96,10 +98,11 @@ const otp = {
     height: 80,
     padding: 10,
     width: 100,
+    justifyContent: 'flex-end'
   },
   otpTextBox: {
     textAlign: 'center',
-    fontSize: 50
+    fontSize: 30
   },
   resendText: {
     flexDirection: 'row',
@@ -118,6 +121,7 @@ const email = {
   header: {
   },
   headerText: {
+    color: (Platform.OS === 'ios') ? null : "white"
   },
   itemContainer: {
     marginVertical: 20,

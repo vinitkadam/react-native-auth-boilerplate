@@ -62,6 +62,7 @@ export default class EmailSignup extends React.Component {
     const signupResp = await tryEmailSignup(email, password);
     this.unsetLoading();
     if (signupResp.success) {
+      await storeSession({id: signupResp.hasura_id, token: signupResp.auth_token, email});
       Alert.alert('Success', 'Please check your email for a verification email');
       this.props.loginScreenCallback();
       return;

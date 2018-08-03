@@ -52,7 +52,7 @@ export default class Verify extends React.Component {
     this.unsetLoading();
     if (authResp.success) {
       Alert.alert('Success', 'Authentication successful');
-      await storeSession({id: authResp.hasura_id, token: authResp.auth_token, mobile: this.props.number, type: "mobile"});
+      await storeSession({id: authResp.hasura_id, token: authResp.auth_token, type: "mobile"});
       this.props.loginCallback({id: authResp.hasura_id, token: authResp.auth_token, mobile: this.props.number, type: "mobile"});
       return;
     } else {
@@ -77,7 +77,7 @@ export default class Verify extends React.Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container} >
           <View style={styles.numberContainer}>
-            <Text style={{textAlign:'center', fontStyle: 'italic'}}> Please enter the OTP sent to {this.state.countryCode}-{this.state.number}</Text>
+            <Text style={{textAlign:'center', fontStyle: 'italic'}}> Please enter the OTP sent to {this.props.countryCode}-{this.props.number}</Text>
           </View>
           <Form>
             <View style={styles.numberContainer}>

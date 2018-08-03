@@ -7,7 +7,8 @@ const tryFbLogin = async (token) => {
   const fbUrl = 'https://graph.facebook.com/me?access_token=' + token;
   let fbProfileInfo = null;
   try {
-    fbProfileInfo = await fetch(fbUrl);
+    fbResp = await fetch(fbUrl);
+    fbProfileInfo = await fbResp.json();
   } catch (e) {
     console.log(e);
     return {
@@ -42,38 +43,39 @@ const tryFbLogin = async (token) => {
 };
 
 const handleFacebookAuth = async(appId, loginCallback, loading, stopLoading) => {
-  try {
-    loading();
-    const {type, token}= await Expo.Facebook.logInWithReadPermissionsAsync(appId, { permissions: ['public_profile']});
-    if (type === 'success') {
-      const facebookProfileInfo = await tryFbLogin(token);
-      if (facebookProfileInfo.success) {
-        await storeSession({
-          id: facebookProfileInfo.hasura_id,
-          token: facebookProfileInfo.auth_token,
-          facebookProfileInfo: facebookProfileInfo.facebook_profile_info
-        });
-        loginCallback({
-          id: facebookProfileInfo.hasura_id,
-          token: facebookProfileInfo.auth_token,
-          facebookProfileInfo: facebookProfileInfo.facebook_profile_info
-        });
-        return;
-      }
-      else {
-        Alert.alert('Error', facebookProfileInfo.message);
+    try {
+      loading();
+      const {type, token}= await Expo.Facebook.logInWithReadPermissionsAsync(appId, { permissions: ['public_profile']});
+      if (type === 'success') {
+        const facebookProfileInfo = await tryFbLogin(token);
+        if (facebookProfileInfo.success) {
+          await storeSession({
+            id: facebookProfileInfo.hasura_id,
+            token: facebookProfileInfo.auth_token,
+            facebookProfileInfo: facebookProfileInfo.fb_profile_info,
+            type: "facebook"
+          });
+          loginCallback({
+            id: facebookProfileInfo.hasura_id,
+            token: facebookProfileInfo.auth_token,
+            facebookProfileInfo: facebookProfileInfo.fb_profile_info,
+            type: "facebook"
+          });
+          return;
+        }
+        else {
+          Alert.alert('Error', facebookProfileInfo.message);
+          stopLoading();
+        }
+      } else {
+        console.log("Facebook login failed: Type: " + type);
         stopLoading();
       }
-    } else {
-      console.log("Facebook login failed. Type: " + type);
+    } catch (e) {
+      console.log(e);
       stopLoading();
     }
   }
-  catch (e) {
-    console.log(e);
-    stopLoading();
-  }
-}
 
 export {
   handleFacebookAuth

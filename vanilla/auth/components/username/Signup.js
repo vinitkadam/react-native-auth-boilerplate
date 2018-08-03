@@ -78,7 +78,9 @@ export default class UsernameSignup extends React.Component {
               placeholder="Username"
               value={this.state.username}
               onChangeText={this.handleUsernameChange}
-              autoCorrect={false} autoCapitalize="none" />
+              autoCorrect={false}
+              autoCapitalize="none"
+            />
           </Item>
           <Item style={styles.textbox}>
             <Input
@@ -99,7 +101,7 @@ export default class UsernameSignup extends React.Component {
             />
           </Item>
         </Form>
-        <Button full dark={platform === 'ios'} onPress={this.handleSignupPress} style={styles.button} disabled={this.state.loading}>
+        <Button full dark={platform === "ios"} onPress={this.handleSignupPress} style={styles.button} disabled={this.state.loading}>
           <Text>{this.state.loading ? "Please wait" : "Signup"}</Text>
         </Button>
       </View>
